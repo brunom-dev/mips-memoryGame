@@ -5,10 +5,10 @@ revealed : .word 0, 0, 0, 0,
 		 		 0, 0, 0, 0,
 		 	  	 0, 0, 0, 0
 
-board : .word 1, 2, 3, 4, 
-	     	  5, 6, 7 ,8, 
-	      	  9, 2, 3, 4, 
-	      	  5, 1, 4, 6
+board : .word 1, 1, 2, 2, 
+	     	  3, 3, 4 ,4, 
+	      	  5, 5, 6, 6, 
+	      	  7, 7, 8, 8
 	      
 	    
 asteris : .asciiz "* "
@@ -22,14 +22,18 @@ n_firstColumn: .word 0
 n_secondRow: .word 0
 n_secondColumn: .word 0
 
-s_firstRow: .asciiz "Enter the row coordinate of first card: "
+s_firstRow: .asciiz "\nEnter the row coordinate of first card: "
 s_firstColumn: .asciiz "Enter the column coordinate of first card: "
 s_secondRow: .asciiz "\nEnter the row coordinate of second card: "
 s_secondColumn: .asciiz "Enter the column coordinate of second card: "
 
 .text
 
+li $k0, 0 # pares
 
+inicio:
+beq $k0, 8, fim
+	jal display_board
 	li $v0, 4
 	la $a0, s_firstRow
 	syscall
@@ -101,13 +105,14 @@ s_secondColumn: .asciiz "Enter the column coordinate of second card: "
 	#comparando eles
 	beq $s1, $s2, acerto
 		sw $zero, 0($s4)
-		sw $zero, 0($s6)
-		jal display_board
-		j fim 
+		sw $zero, 0($s6) 
+		j inicio
 	acerto:
 		li $v0, 4
 		la $a0, correct
 		syscall
+		addi $k0, $k0, 1
+		j inicio
 	
 fim:
 addi $v0, $zero, 10
