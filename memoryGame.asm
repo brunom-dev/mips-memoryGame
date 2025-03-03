@@ -10,12 +10,25 @@ board : .word 1, 1, 2, 2,
 	      	  5, 5, 6, 6, 
 	      	  7, 7, 8, 8
 	      
+
+header1:     .asciiz "*********************************************\n"
+header2:     .asciiz "*         JOGO DA MEMÓRIA EM MIPS           *\n"
+header3:	 .asciiz "*                                           *\n"
+header4:     .asciiz "*  Bem-vindo ao desafio da memória!         *\n"
+header5:     .asciiz "*  Encontre os pares escondidos e mostre    *\n"
+header6:     .asciiz "*  suas habilidades de raciocínio!          *\n"
+header7:     .asciiz "*                                           *\n"
+header8:     .asciiz "*  Desenvolvido por: Bruno e Sebastião      *\n"
+header9:     .asciiz "*  Disciplina: Arquitetura de Computadores  *\n"
+header10:    .asciiz "*                                           *\n"
+header11:    .asciiz "*********************************************\n"
 	    
 asteris : .asciiz "* "
 breakLine : .asciiz "\n"
 space : .asciiz " "
-correct : .asciiz "\n\n Acertou!! \n\n"
-
+correct : .asciiz "\nPares iguais, acertou!!"
+incorrect: .asciiz "\nOps! Incorreto. Tente novamente"
+end_game: .asciiz "\n \tPARABÉNS!! \n FIM DE JOGO."
 
 n_firstRow: .word 0
 n_firstColumn: .word 0 
@@ -29,8 +42,31 @@ s_secondColumn: .asciiz "Enter the column coordinate of second card: "
 
 .text
 
-li $k0, 0 # pares
+li $v0, 4
+la $a0, header1
+syscall
+la $a0, header2
+syscall
+la $a0, header3
+syscall
+la $a0, header4
+syscall
+la $a0, header5
+syscall
+la $a0, header6
+syscall
+la $a0, header7
+syscall
+la $a0, header8
+syscall
+la $a0, header9
+syscall
+la $a0, header10
+syscall
+la $a0, header11
+syscall
 
+li $k0, 0 # pares
 inicio:
 beq $k0, 8, fim
 	jal display_board
@@ -106,6 +142,9 @@ beq $k0, 8, fim
 	beq $s1, $s2, acerto
 		sw $zero, 0($s4)
 		sw $zero, 0($s6) 
+		li $v0, 4
+		la $a0, incorrect
+		syscall
 		j inicio
 	acerto:
 		li $v0, 4
@@ -115,6 +154,9 @@ beq $k0, 8, fim
 		j inicio
 	
 fim:
+li $v0, 4
+la $a0, end_game
+syscall
 addi $v0, $zero, 10
 syscall
 
@@ -197,7 +239,7 @@ display_board:
 		addi $s0, $s0, 1
 		j begin_for_i
 	end_for_i:
+	li $v0, 4
+	la $a0, breakLine
+	syscall
 	jr $ra
-
-	
-
