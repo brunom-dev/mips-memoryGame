@@ -42,6 +42,8 @@ s_secondColumn: .asciiz "Enter the column coordinate of second card: "
 
 .text
 
+
+# CABEÇALHO
 li $v0, 4
 la $a0, header1
 syscall
@@ -72,30 +74,30 @@ beq $k0, 8, fim
 	jal display_board
 	li $v0, 4
 	la $a0, s_firstRow
-	syscall
+	syscall # pergunta do L1
 	li $v0, 5
-	syscall
+	syscall # input do L1
 	la $t1, n_firstRow
-	sw $v0, 0($t1)
-	add $s1, $zero, $v0
+	sw $v0, 0($t1) # salvo o valor em n_firstRow
+	add $s1, $zero, $v0 # salvo o mesmo valor em S1
 
 	li $v0, 4
-	la $a0, s_firstColumn
-	syscall
+	la $a0, s_firstColumn 
+	syscall # pergunta do L2
 	li $v0, 5
-	syscall
+	syscall # input do L1
 	la $t2, n_firstColumn
-	sw $v0, 0($t2)
-	add $s2, $zero, $v0
+	sw $v0, 0($t2) # salvo o valor em n_firstColumn
+	add $s2, $zero, $v0 # salvo o mesmo valor em S2
 
 	sll $t0, $s1, 2
 	add $t0, $t0, $s2
 	sll $t0, $t0, 2
 	
 	la $s4, revealed
-	add $s4, $s4, $t0 # s4 endereco do primeiro elemento na tabela revelado
+	add $s4, $s4, $t0 # s4 salva o endereco do primeiro elemento na tabela revelado
 	la $s5, board
-	add $s5, $s5, $t0 # s5 endereco do primeiro elemento na tabela original
+	add $s5, $s5, $t0 # s5 salva endereco do primeiro elemento na tabela original
 
 	addi $t0, $zero, 1
 	sw $t0, 0($s4) # revelando o primeiro elemento 
@@ -125,9 +127,9 @@ beq $k0, 8, fim
 	sll $t0, $t0, 2
 	
 	la $s6, revealed 
-	add $s6, $s6, $t0 # s6 endereco do segundo elemento na tabela revelado
+	add $s6, $s6, $t0 # s6 salva endereco do segundo elemento na tabela revelado
 	la $s7, board 
-	add $s7, $s7, $t0 # s7 endereco do segundo elemento na tabela original
+	add $s7, $s7, $t0 # s7 salva endereco do segundo elemento na tabela original
 	
 	addi $t0, $zero, 1 
 	sw $t0, 0($s6) # revelando o segundo elemento 
