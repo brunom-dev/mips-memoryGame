@@ -41,4 +41,19 @@
   
 
 ## Implementação do jogo
+A Implementação foi desenvolvida utilizando Assembly MIPS e executado no simulador MARS. A mesma segue uma estrutura baseada em memória, onde o tabuleiro e o estado das cartas são armazenados em arrays. O jogo segue um fluxo contínuo de interação com o usuário, solicitando coordenadas e verificando pares até que todas as combinações sejam encontradas.
+
+<div align="center">
+   <br><img width="30%" src="docs/data.png"><br>
+</div> <br>
+
+
+
+
+
+
+
+
+
+
 
