@@ -43,17 +43,53 @@
 ## Implementação do jogo
 A Implementação foi desenvolvida utilizando Assembly MIPS e executado no simulador MARS. A mesma segue uma estrutura baseada em memória, onde o tabuleiro e o estado das cartas são armazenados em arrays. O jogo segue um fluxo contínuo de interação com o usuário, solicitando coordenadas e verificando pares até que todas as combinações sejam encontradas.
 
-<div align="center">
-   <br><img width="30%" src="docs/data.png"><br>
-</div> <br>
+### Declaração e Inicialização dos dados na memória.
+
+<p>Inicialmente, declaramos e inicializamos as variáveis que iriamos precisar durante o desenvolvimento do jogo no bloco de codigo reservado <code>data</code>. Sendo elas: Duas matrizes (Matriz das Cartas e Matriz do Status das cartas), Variáveis contendo conteudo do cabeçalho, Variáveis contendo conteúdo para exibir resultados, e por fim Variáveis com as perguntas das coordenadas e para as armazenar as coordenadas que o usuário inserir. </p>
+
+<div>
+   <br><img width="70%" src="docs/1.png"><br>
+   <i> Image 1 - Declaração e Inicilização das Matrizes das Cartas e Status</i>
+</div> 
+
+<div>
+   <br><img width="70%" src="docs/2.png"><br>
+    <i> Image 2 - Declaração e Inicilização das Variaveis para o cabeçalho</i>
+</div> 
+
+<div>
+   <br><img width="70%" src="docs/3.png"><br>
+    <i> Image 3 - Declaração e Inicilização das Variaveis para exibição de resultados</i>
+</div> 
+
+<div>
+   <br><img width="70%" src="docs/4.png"><br>
+   <i> Image 4 - Declaração e Inicilização das variaveis para exibição e armazemento das inserções do usuário</i>
+</div> 
+
+<br>
 
 
+### Boas Vindas e Funcionamento do Loop principal
+O programa inicia exibindo um cabeçalho de boas-vindas e, em seguida, entra no loop principal, onde o jogador insere as coordenadas das cartas. Após cada tentativa, o tabuleiro é atualizado e exibido novamente, permitindo ao jogador visualizar as cartas reveladas e escondidas.
+
+O loop principal verifica se o numero total de pares revelados é igual a 8, que corresponderia ao FIM DO JOGO, tendo que o jogo inicializa em um registrador <code>$k0</code> o conteudo da quantidade de pares revelados sendo 0 (zero). E a cada acerto do usuário, ou seja a cada a revelação de duas cartas com contéudo igual, é incrementado 1 (um) ao conteúdo desse mesmo registrador <code>$k0</code>.
+
+<div>
+   <br><img width="70%" src="docs/5.png"><br>
+   <i> Image 5 - Exibição do cabeçalho</i>
+</div> 
 
 
+<div>
+   <br><img width="70%" src="docs/6.png"><br>
+   <i> Image 6 - Inicilização do Registrador dos pares e Condição do Loop</i>
+</div> 
 
 
+<div>
+   <br><img width="70%" src="docs/7.png"><br>
+   <i> Image 7 - Operações em caso de acerto</i>
+</div> 
 
-
-
-
-
+### Função de exibição do tabuleiro 
