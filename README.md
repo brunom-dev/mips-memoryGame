@@ -98,7 +98,7 @@ A função display_board tem a responsabilidade de exibir o tabuleiro do jogo da
 
 Inicialmente, a função imprime algumas quebras de linha para formatar a saída e melhorar a legibilidade. Em seguida, exibe os números das colunas, que servem como referência para que o jogador possa inserir corretamente as coordenadas das cartas. Depois disso, a função entra em um loop que percorre cada linha do tabuleiro. Para cada linha, primeiramente, é impresso o número correspondente àquela linha, facilitando a identificação pelo jogador. 
 
-Em seguida, outro loop percorre as colunas dessa linha, verificando se a carta naquela posição já foi revelada.Se a carta foi revelada, ou seja, se o valor correspondente na matriz Status (revealed) for diferente de zero, seu número real é impresso na tela. Caso contrário, um asterisco (*) é exibido, indicando que a carta ainda está oculta. Para iteração sobre os elementos das matrizes foi utilizada uma pequena manipulação do indice do FOR, onde o elemento que queriamos imprimir tinha como endereço a seguinte manipulação: 
+Em seguida, outro loop percorre as colunas dessa linha, verificando se a carta naquela posição já foi revelada, onde essa verificação é realizada a partir do endereco do elemento atual, como cada elemento da matriz de status corresponde a proprio elemento da matriz de cartas, nos possibilita utilizar o mesmo indice para verificar o status da carta correspondente.Se a carta foi revelada, ou seja, se o valor correspondente na matriz Status (revealed) for diferente de zero, seu número real é impresso na tela. Caso contrário, um asterisco (*) é exibido, indicando que a carta ainda está oculta. Para iteração sobre os elementos das matrizes foi utilizada uma pequena manipulação do indice do FOR, onde o elemento que queriamos imprimir tinha como endereço a seguinte manipulação: 
 
 <b>Endereco do primeiro elemento + [(i*4 + j) * 4] = Endereco do elemento atual na iteração.</b>
 
@@ -114,4 +114,21 @@ A função não possui retorno, apenas faz a exibição e retorna para o endere�
 </div> 
 
 
-### 
+### Loop principal
+
+O loop principal controla todo o funcionamento do jogo, desde a coleta das coordenadas das cartas até a verificação de pares e a finalização do jogo. Ele garante que o jogador possa interagir de forma contínua até que todas as cartas tenham sido encontradas.
+
+Ele inicia verificando se o jogador já encontrou todos os pares. Isso é feito comparando a variável de controle ($k0), que mantém a contagem de pares encontrados, com o valor 8, correspondente ao número total de pares no tabuleiro. Se todos os pares forem encontrados, o jogo exibe uma mensagem de conclusão e termina a execução.
+
+Caso contrário, o jogo continua pedindo ao jogador que insira as coordenadas de duas cartas. Primeiro, são solicitados os valores de linha e coluna da primeira carta. Esses valores são lidos, armazenados na memória e usados para acessar a matriz cartas (board), que contém os números das cartas, onde o endereco dessa carta é armazenado no registrador <code>$s5</code>, e a matriz status (revealed), que controla quais cartas estão visíveis, onde é o valor é alterado para 1 indicando que está revelado. Em seguida, o mesmo processo ocorre para a segunda carta, neste caso o endereço da segunda carta é armazenado no registrador <code>$s7</code>.
+
+Após obter as coordenadas das duas cartas, ambas são temporariamente reveladas no tabuleiro, e a função display_board é chamada novamente para exibir a atualização. Então, os valores dessas cartas são carregados da matriz board e comparados. Se forem iguais, significa que o jogador encontrou um par correto, e as cartas permanecem visíveis. Caso contrário, as cartas são ocultadas novamente, e o jogo prossegue.
+
+O loop continua até que todos os pares tenham sido encontrados. A cada iteração, o tabuleiro é atualizado para mostrar o progresso do jogador.
+
+<div>
+   <img width="70%" src="docs/11.png">
+   <img width="70%" src="docs/12.png">
+   <img width="70%" src="docs/13.png"><br>
+   <i> Image 9 - Main</i>
+</div> 
