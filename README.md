@@ -93,3 +93,25 @@ O loop principal verifica se o numero total de pares revelados é igual a 8, que
 </div> 
 
 ### Função de exibição do tabuleiro 
+
+A função display_board tem a responsabilidade de exibir o tabuleiro do jogo da memória, permitindo que o jogador visualize quais cartas já foram reveladas e quais ainda permanecem ocultas. Para isso, ela percorre a matriz do tabuleiro e imprime seus valores de forma organizada na tela. 
+
+Inicialmente, a função imprime algumas quebras de linha para formatar a saída e melhorar a legibilidade. Em seguida, exibe os números das colunas, que servem como referência para que o jogador possa inserir corretamente as coordenadas das cartas. Depois disso, a função entra em um loop que percorre cada linha do tabuleiro. Para cada linha, primeiramente, é impresso o número correspondente àquela linha, facilitando a identificação pelo jogador. 
+
+Em seguida, outro loop percorre as colunas dessa linha, verificando se a carta naquela posição já foi revelada.Se a carta foi revelada, ou seja, se o valor correspondente na matriz Status (revealed) for diferente de zero, seu número real é impresso na tela. Caso contrário, um asterisco (*) é exibido, indicando que a carta ainda está oculta. Para iteração sobre os elementos das matrizes foi utilizada uma pequena manipulação do indice do FOR, onde o elemento que queriamos imprimir tinha como endereço a seguinte manipulação: 
+
+<b>Endereco do primeiro elemento + [(i*4 + j) * 4] = Endereco do elemento atual na iteração.</b>
+
+Por fim, a função adiciona mais uma quebra de linha para manter a organização visual do tabuleiro na tela. Dessa forma, sempre que o jogo atualiza o estado do tabuleiro, o jogador pode facilmente identificar os pares que já encontrou.
+
+A função não possui retorno, apenas faz a exibição e retorna para o endereço da instrução armazenada no registrador <code>$ra</code>
+
+<div>
+   <img width="70%" src="docs/8.png">
+   <img width="70%" src="docs/9.png">
+   <img width="70%" src="docs/10.png"><br>
+   <i> Image 8 - Função dusplay_board</i>
+</div> 
+
+
+### 
